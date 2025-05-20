@@ -1,22 +1,21 @@
+
 <!DOCTYPE html>
+
 <html lang="ru">
 <head>
-  
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Флагманские Поставки</title>
-  <!-- Favicon and Social Preview -->
-  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/1198/1198293.png" type="image/png">
-  <meta property="og:title" content="Флагманские поставки для промышленности">
-  <meta property="og:description" content="Поставки компрессоров, проволоки и модулей от 14 дней с гарантией и возвратом.">
-  <meta property="og:type" content="website">
-  <meta name="twitter:card" content="summary_large_image">
-
-  <!-- Fonts & Icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-
-  <!-- Styles -->
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Флагманские Поставки</title>
+<!-- Favicon and Social Preview -->
+<link href="https://cdn-icons-png.flaticon.com/512/1198/1198293.png" rel="icon" type="image/png"/>
+<meta content="Флагманские поставки для промышленности" property="og:title"/>
+<meta content="Поставки компрессоров, проволоки и модулей от 14 дней с гарантией и возвратом." property="og:description"/>
+<meta content="website" property="og:type"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<!-- Fonts & Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<!-- Styles -->
+<style>
     body { font-family: 'Inter', sans-serif; background: #f4f6fa; color: #1a1a1a; margin: 0; line-height: 1.6; }
     .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
     .hero { background: linear-gradient(135deg, #f2f6ff, #e2ebf9); padding: 4rem 2rem; border-radius: 12px; text-align: center; box-shadow: 0 0 20px rgba(0,0,0,0.05); }
@@ -39,17 +38,15 @@
       .category-button { width: 100%; margin-bottom: 0.5rem; }
     }
   </style>
-
-  <!-- Yandex.Metrika -->
-  <script>
+<!-- Yandex.Metrika -->
+<script>
     (function(m,e,t,r,i,k,a){ m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)}; m[i].l=1*new Date(); k=e.createElement(t), a=e.getElementsByTagName(t)[0]; k.async=1; k.src=r; a.parentNode.insertBefore(k,a);
     })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js', 'ym');
     ym(102029037, 'init', { clickmap:true, trackLinks:true, accurateTrackBounce:true });
   </script>
-  <noscript><div><img src="https://mc.yandex.ru/watch/102029037" style="position:absolute; left:-9999px;" alt=""/></div></noscript>
-
-  <!-- Scripts -->
-  <script>
+<noscript><div><img alt="" src="https://mc.yandex.ru/watch/102029037" style="position:absolute; left:-9999px;"/></div></noscript>
+<!-- Scripts -->
+<script>
     function showItem(id) {
       ['compressor-section','wire-section','module-section'].forEach(s => {
         const el = document.getElementById(s);
@@ -59,94 +56,123 @@
       const active = [...document.querySelectorAll('.category-button')].find(b=>b.getAttribute('onclick').includes(id));
       if(active) active.classList.add('active');
     }
-    function sendForm(e) {
-      e.preventDefault();
-      const form = e.target;
-      const name = form.querySelector('input[type="text"]').value;
-      const phone = form.querySelector('input[type="tel"]').value;
-      const message = form.querySelector('textarea').value;
-      const token = '7946517201:AAFD7wnkmY3lWyPPkhDWzBu9qyYko_77EqA';
-      const chatId = '125279912';
-      const msg = `📥 Новая заявка:\n👤 Имя: ${name}\n📞 Телефон: ${phone}\n💬 Сообщение: ${message}`;
-      const btn = form.querySelector("button");
-      btn.disabled = true;
+    
+function sendForm(e) {
+  e.preventDefault();
+  const form = e.target;
+  const name = form.querySelector('input[name="name"]').value;
+  const phone = form.querySelector('input[name="phone"]').value;
+  const message = form.querySelector('textarea[name="message"]').value;
+  const btn = form.querySelector("button");
+  btn.disabled = true;
 
-      const formData = new FormData();
+  const formData = new FormData();
   formData.append("name", name);
   formData.append("phone", phone);
   formData.append("message", message);
+
   fetch("https://alsept.sst-tarasenko.workers.dev/", {
-  method: "POST",
-  body: formData
-      }).then(() => {
-        alert('Заявка отправлена!');
-        form.reset();
-        setTimeout(() => { btn.disabled = false; }, 5000);
-        ym(102029037, 'reachGoal', 'form_submit');
-        document.getElementById('thank-you').scrollIntoView({ behavior: 'smooth' });
-        window.location.hash = 'thank-you';
-      }).catch(() => {
-        alert('Ошибка отправки.');
-        btn.disabled = false;
-      });
+    method: "POST",
+    body: formData
+  }).then(() => {
+    ym(102029037, 'reachGoal', 'form_submit');
+    const thanks = document.getElementById('thank-you');
+    if (thanks) {
+      thanks.scrollIntoView({ behavior: 'smooth' });
     }
-  </script>
+    btn.textContent = "Отправлено!";
+    form.reset();
+    setTimeout(() => {
+      btn.disabled = false;
+      btn.textContent = "Получить предложение";
+    }, 4000);
+  }).catch(() => {
+    alert('Ошибка отправки.');
+    btn.disabled = false;
+  });
+}
+</script>
 </head>
 <body>
-
-
-
-  
-  <div class="container">
-    <section class="hero">
-      <h1>Закажите промышленную поставку — от 14 дней под ключ</h1>
-      <p>Компрессоры, сварочная проволока, электронные модули. Гарантия 24 мес., фиксированная цена, возврат 20%.</p>
-      <form class="form" onsubmit="sendForm(event)">
-        <input type="text" name="name" placeholder="Ваше имя" required>
-        <input type="tel" name="phone" placeholder="Телефон" required pattern="^\+?(7|8)\d{10}$" title="Введите номер в формате +79001234567">
-    <textarea name="message" placeholder="Ваше сообщение" rows="4" style="width:100%; padding:1rem; margin-bottom:1rem; border-radius:8px; border:1px solid #ccc; font-size:1rem;"></textarea>
-        <button type="submit">Получить предложение</button>
-      </form>
-      <div class="whatsapp">
-        <a href="https://wa.me/996505199139?utm_source=landing&utm_medium=button&utm_campaign=lead_form" target="_blank">Связаться в WhatsApp</a>
-      </div>
-    </section>
-
-    <section class="trust">
-      <h2>Выберите категорию продукции</h2>
-      <div style="display:flex;gap:1rem;flex-wrap:wrap;">
-        <button onclick="showItem('compressor-section')" class="category-button active">Компрессоры</button>
-        <button onclick="showItem('wire-section')" class="category-button">Сварочная проволока</button>
-        <button onclick="showItem('module-section')" class="category-button">Электронные модули</button>
-      </div>
-      <div id="compressor-section">
-        <p><strong>Спиральные компрессоры:</strong> от 85 000 ₽/шт, срок поставки — от 14 дней.</p>
-        <ul><li>Фиксированная цена — 12 мес.</li><li>Гарантия 24 мес.</li><li>Возврат 20% при простое.</li><li>Блокчейн-логистика, AI-прогноз.</li></ul>
-      </div>
-      <div id="wire-section" style="display:none;">
-        <p><strong>Медный сварочный провод AWS ER70S‑6:</strong> от 165 ₽/кг при отгрузке от 20 тонн.</p>
-        <ul><li>Диаметры 0,8 / 1,0 / 1,2 мм</li><li>Катушки 15 кг (30×20×19 см)</li><li>Поставка — от 14 дней</li><li>Фикс цена — 2 мес.</li><li>Возврат 20% при браке</li></ul>
-      </div>
-      <div id="module-section" style="display:none;">
-        <p><strong>Электронные модули и силовые блоки:</strong></p>
-        <ul><li>Поставка — от 14 дней</li><li>Гарантия 24 мес.</li><li>Фикс цена — 3 мес.</li><li>Возврат 20% при браке</li><li>Сертификаты ГОСТ, ISO 9001</li></ul>
-      </div>
-    </section>
-
-    <section class="trust">
-      <h2>Отзывы клиентов</h2>
-      <div class="case"><strong>Кейс 1:</strong> Поставка сварочной проволоки AWS ER70S‑6 на завод в Екатеринбурге (48 300 кг, 20 дней). Отзыв: «Приехало точно в график ТО, нареканий нет».</div>
-      <div class="case"><strong>Кейс 2:</strong> Электронные и силовые модули для модернизации линии в Чебоксарах (34 блока, 10 дней). Отзыв: «Запустили раньше срока, цифровой резерв».</div>
-      <div class="case"><strong>Кейс 3:</strong> Компрессоры Danfoss для охлаждения ж/д вагонов в Москве (160 шт, 30 дней). Отзыв: «Эффективность подтвердили — отказов нет».</div>
-      <p><strong>Гарантийный оффер:</strong> 20% возврата при простое в течение 72 ч.</p>
-      <p><strong>Сертификация:</strong> ГОСТ, ISO 9001. <strong>Партнёрство:</strong> сеть по ЕАЭС, Китаю, Азии, Европе.</p>
-    </section>
-
-    <noscript><p style="color:red;text-align:center;">Для работы сайта включите JavaScript.</p></noscript>
-  </div>
-
+<div class="container">
+<section class="hero">
+<h1>Закажите промышленную поставку — от 14 дней под ключ</h1>
+<p>Компрессоры, сварочная проволока, электронные модули. Гарантия 24 мес., фиксированная цена, возврат 20%.</p>
+<form class="form" onsubmit="sendForm(event)">
+<input name="name" oninput="this.value = this.value.replace(/(^|\s)\S/g, l => l.toUpperCase());" placeholder="Ваше имя" required="" type="text"/>
+<input name="phone" pattern="^\+7\s?\(?\d{3}\)?\s?\d{3}[-\s]?\d{2}[-\s]?\d{2}$" placeholder="Телефон" required="" title="Введите номер в формате +79001234567" type="tel"/>
+<textarea name="message" placeholder="Ваше сообщение" rows="4" style="width:100%; padding:1rem; margin-bottom:1rem; border-radius:8px; border:1px solid #ccc; font-size:1rem;"></textarea>
+<button type="submit">Получить предложение</button>
+</form>
+<div class="whatsapp">
+<a href="https://wa.me/996505199139?utm_source=landing&amp;utm_medium=button&amp;utm_campaign=lead_form" target="_blank">Связаться в WhatsApp</a>
+</div>
+</section>
+<section class="trust">
+<h2>Выберите категорию продукции</h2>
+<div style="display:flex;gap:1rem;flex-wrap:wrap;">
+<button class="category-button active" onclick="showItem('compressor-section')">Компрессоры</button>
+<button class="category-button" onclick="showItem('wire-section')">Сварочная проволока</button>
+<button class="category-button" onclick="showItem('module-section')">Электронные модули</button>
+</div>
+<div id="compressor-section">
+<p><strong>Спиральные компрессоры:</strong> от 85 000 ₽/шт, срок поставки — от 14 дней.</p>
+<ul><li>Фиксированная цена — 12 мес.</li><li>Гарантия 24 мес.</li><li>Возврат 20% при простое.</li><li>Блокчейн-логистика, AI-прогноз.</li></ul>
+</div>
+<div id="wire-section" style="display:none;">
+<p><strong>Медный сварочный провод AWS ER70S‑6:</strong> от 165 ₽/кг при отгрузке от 20 тонн.</p>
+<ul><li>Диаметры 0,8 / 1,0 / 1,2 мм</li><li>Катушки 15 кг (30×20×19 см)</li><li>Поставка — от 14 дней</li><li>Фикс цена — 2 мес.</li><li>Возврат 20% при браке</li></ul>
+</div>
+<div id="module-section" style="display:none;">
+<p><strong>Электронные модули и силовые блоки:</strong></p>
+<ul><li>Поставка — от 14 дней</li><li>Гарантия 24 мес.</li><li>Фикс цена — 3 мес.</li><li>Возврат 20% при браке</li><li>Сертификаты ГОСТ, ISO 9001</li></ul>
+</div>
+</section>
+<section class="trust">
+<h2>Отзывы клиентов</h2>
+<div class="case"><strong>Кейс 1:</strong> Поставка сварочной проволоки AWS ER70S‑6 на завод в Екатеринбурге (48 300 кг, 20 дней). Отзыв: «Приехало точно в график ТО, нареканий нет».</div>
+<div class="case"><strong>Кейс 2:</strong> Электронные и силовые модули для модернизации линии в Чебоксарах (34 блока, 10 дней). Отзыв: «Запустили раньше срока, цифровой резерв».</div>
+<div class="case"><strong>Кейс 3:</strong> Компрессоры Danfoss для охлаждения ж/д вагонов в Москве (160 шт, 30 дней). Отзыв: «Эффективность подтвердили — отказов нет».</div>
+<p><strong>Гарантийный оффер:</strong> 20% возврата при простое в течение 72 ч.</p>
+<p><strong>Сертификация:</strong> ГОСТ, ISO 9001. <strong>Партнёрство:</strong> сеть по ЕАЭС, Китаю, Азии, Европе.</p>
+</section>
+<noscript><p style="color:red;text-align:center;">Для работы сайта включите JavaScript.</p></noscript>
+</div>
 <div id="thank-you" style="margin-top:2rem; text-align:center; font-weight:bold; color:green;">
   ✅ Спасибо! Ваша заявка отправлена.
 </div>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const phoneInput = document.querySelector('input[name="phone"]');
+  if (phoneInput) {
+    phoneInput.addEventListener('input', function (e) {
+      let numbers = this.value.replace(/\D/g, '');
+      if (numbers.startsWith('8')) numbers = '7' + numbers.slice(1);
+      if (!numbers.startsWith('7')) numbers = '7' + numbers;
+      numbers = numbers.slice(0, 11);
+
+      let formatted = '+7 ';
+      if (numbers.length > 1) formatted += '(' + numbers.slice(1, 4);
+      if (numbers.length >= 4) formatted += ') ' + numbers.slice(4, 7);
+      if (numbers.length >= 7) formatted += '-' + numbers.slice(7, 9);
+      if (numbers.length >= 9) formatted += '-' + numbers.slice(9, 11);
+      this.value = formatted;
+    });
+  }
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const messageInput = document.querySelector('textarea[name="message"]');
+  if (messageInput) {
+    messageInput.addEventListener('input', function () {
+      this.value = this.value
+        .toLowerCase()
+        .replace(/(^\s*\w|[\.\!\?]\s*\w)/g, txt => txt.toUpperCase());
+    });
+  }
+});
+</script>
 </body>
 </html>
