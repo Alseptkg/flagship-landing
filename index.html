@@ -1,165 +1,41 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <!-- Favicon and Social Preview -->
-  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/1198/1198293.png" type="image/png">
-  <meta property="og:title" content="Флагманские поставки для промышленности">
-  <meta property="og:description" content="Поставки компрессоров, проволоки и модулей от 14 дней с гарантией и возвратом.">
-  <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Eurasian_Economic_Union_Map.svg/600px-Eurasian_Economic_Union_Map.svg.png">
-  <meta property="og:type" content="website">
-  <meta name="twitter:card" content="summary_large_image">
-
-  <!-- Responsive Tweaks -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Форма с Telegram-интеграцией</title>
   <style>
-    @media screen and (max-width: 768px) {
-      .form, .hero, .trust, .category-button {
-        padding: 1rem !important;
-      }
-      .form input, .form button {
-        width: 100%;
-        font-size: 1rem;
-      }
-    }
+    body { font-family: sans-serif; background: #f8f9fa; padding: 2rem; }
+    .form { max-width: 400px; margin: 0 auto; background: #fff; padding: 2rem; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.05); }
+    .form input, .form button { width: 100%; padding: 1rem; margin-bottom: 1rem; border-radius: 6px; border: 1px solid #ccc; font-size: 1rem; }
+    .form button { background: #28a745; color: #fff; border: none; cursor: pointer; }
   </style>
-
-  <!-- Analytics -->
-  <script type="text/javascript">
-    (function(m,e,t,r,i,k,a){
-      m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-      m[i].l=1*new Date();
-      k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-    })(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-    ym(12345678, "init", {
-      clickmap:true,
-      trackLinks:true,
-      accurateTrackBounce:true
-    });
-  </script>
-  <noscript><div><img src="https://mc.yandex.ru/watch/12345678" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Флагманские Поставки</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <script>
-    function showItem(id) {
-      const ids = ['compressor-section', 'wire-section', 'module-section'];
-      ids.forEach(function(sectionId) {
-        const el = document.getElementById(sectionId);
-        if (el) {
-          el.style.display = sectionId === id ? 'block' : 'none';
-        }
-      });
-      const buttons = document.querySelectorAll('.category-button');
-      buttons.forEach(btn => btn.classList.remove('active'));
-      const activeBtn = Array.from(buttons).find(btn => btn.getAttribute('onclick').includes(id));
-      if (activeBtn) activeBtn.classList.add('active');
-    }
-  </script>
-<style>
-  @media screen and (max-width: 480px) {
-    .category-button {
-      width: 100%;
-      margin-bottom: 0.5rem;
-    }
-    .hero h1 { font-size: 1.5rem; }
-    .hero p, .form input, .form button { font-size: 1rem; }
-  }
-</style>
-<script>
-  function sendForm(e) {
-    e.preventDefault();
-    const name = document.querySelector('.form input[type="text"]').value;
-    const phone = document.querySelector('.form input[type="tel"]').value;
-    const token = 'ВАШ_ТОКЕН';
-    const chatId = 'ВАШ_CHAT_ID';
-    const msg = `📥 Новая заявка:
-👤 Имя: ${name}
-📞 Телефон: ${phone}`;
-    fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ chat_id: chatId, text: msg })
-    }).then(() => alert('Заявка отправлена!')).catch(() => alert('Ошибка отправки.'));
-  }
-</script>
 </head>
-<body style="background-color: #f4f6fa; font-family: 'Inter', sans-serif; color: #1a1a1a; line-height: 1.6;">
-  <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 2rem;">
-    <section class="hero" id="hero" style="text-align: center; padding: 4rem 2rem; background: linear-gradient(135deg, #f2f6ff, #e2ebf9) url('https://cdn-icons-png.flaticon.com/512/744/744922.png') no-repeat 95% 20px / 80px; border-radius: 12px; box-shadow: 0 0 20px rgba(0,0,0,0.05);">
-      <h1 style="animation: fadeIn 2s ease-out;">Закажите промышленную поставку — от 14 дней под ключ</h1>
-      <h2 style="margin-top: 1rem; font-size: 1.5rem; color: #333;">Флагманские решения</h2>
-      <p>Мы предлагаем поставки по трём ключевым товарным направлениям с максимальным потенциалом: спиральные компрессоры, медная сварочная проволока и электронные модули.</p>
-      <p>Компрессоры, сварочная проволока, электронные модули от лидеров отрасли: Danfoss, Bitzer, Siemens и другие. Гарантия 24 месяца, фиксированная цена до 12 мес., возврат 20% при простое оборудования — чёткие условия без бюрократии.</p>
-      <div style="margin-top: 2rem;">
-        <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem;">Получите персональное предложение</h3>
-        <p style="font-size: 0.95rem; color: #444; margin-bottom: 1rem;">Оставьте ваши данные — мы перезвоним в течение 15 минут и подготовим расчёт стоимости.</p>
-        <form class="form" onsubmit="sendForm(event)">
-          <input type="text" placeholder="Ваше имя" required>
-          <input type="tel" placeholder="Телефон" required>
-          <button type="submit">Получить предложение</button>
-        </form>
-      </div>
-      <div class="whatsapp">
-        <a href="https://wa.me/79163408393?utm_source=landing&utm_medium=button&utm_campaign=lead_form" target="_blank">Связаться в WhatsApp</a>
-      </div>
-    </section>
+<body>
+  <div class="form">
+    <h2>Заявка на поставку</h2>
+    <form onsubmit="sendForm(event)">
+      <input type="text" placeholder="Ваше имя" required />
+      <input type="tel" placeholder="Телефон" required />
+      <button type="submit">Отправить</button>
+    </form>
   </div>
 
-<!-- Категории -->
-<section class="trust" style="background: #ffffff; margin-top: 2rem; padding: 2rem; border-radius: 12px; box-shadow: 0 0 10px rgba(0,0,0,0.04);">
-  <h2 style="font-size: 1.6rem; margin-bottom: 1.2rem;">Выберите категорию продукции</h2>
-  <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem;">
-    <button onclick="showItem('compressor-section')" class="category-button" style="padding: 1rem 2rem; min-width: 200px; background: #ffffff; border: 2px solid #1b72e8; border-radius: 10px; font-weight: 600; cursor: pointer; transition: 0.3s;">Компрессоры</button>
-    <button onclick="showItem('wire-section')" class="category-button" style="padding: 1rem 2rem; min-width: 200px; background: #ffffff; border: 2px solid #1b72e8; border-radius: 10px; font-weight: 600; cursor: pointer; transition: 0.3s;">Сварочная проволока</button>
-    <button onclick="showItem('module-section')" class="category-button" style="padding: 1rem 2rem; min-width: 200px; background: #ffffff; border: 2px solid #1b72e8; border-radius: 10px; font-weight: 600; cursor: pointer; transition: 0.3s;">Электронные модули</button>
-  </div>
-  <div id="compressor-section" style="display: block;">
-    <p><strong>Спиральные компрессоры:</strong> от 85 000 ₽/шт, срок поставки от 14 дней.</p>
-    <ul style="padding-left: 1.2rem; margin-bottom: 1rem;">
-      <li style="margin-bottom: 0.5rem;">Фиксированная цена на 12 месяцев</li>
-      <li>Гарантия 24 месяца</li>
-      <li>Возврат 20% стоимости при простое оборудования</li>
-      <li>Блокчейн-контроль логистики, AI-прогноз выхода из строя</li>
-    </ul>
-  </div>
-  <div id="wire-section" style="display: none;">
-    <p><strong>Медный сварочный провод AWS ER70S-6:</strong> от 165 ₽/кг при заказе от 20 тонн.</p>
-    <ul>
-      <li>Диаметры: 0,8мм / 1,0мм / 1,2мм</li>
-      <li>Катушки по 15 кг, размер 30×20×19 см</li>
-      <li>Поставка от 14 дней</li>
-      <li>Фиксированная цена на 2 месяца</li>
-      <li>Возврат 20% стоимости при обнаружении брака</li>
-    </ul>
-  </div>
-  <div id="module-section" style="display: none;">
-    <p><strong>Электронные модули и силовые блоки:</strong></p>
-    <ul>
-      <li>Поставка от 14 дней</li>
-      <li>Гарантия 24 месяца</li>
-      <li>Фиксированная цена на 3 месяца</li>
-      <li>Возврат 20% стоимости при выявленном браке</li>
-      <li>Сертификаты ГОСТ, ISO 9001</li>
-    </ul>
-  </div>
-</section>
-
-<!-- Отзывы -->
-<section class="trust">
-  <h2>Отзывы клиентов</h2>
-  <div class="case">
-    <strong>Кейс 1:</strong> Поставка сварочной проволоки AWS ER70S-6 на промышленное предприятие в Екатеринбурге. Объём — 48 300 кг, срок — 20 дней. Отзыв: «Приехало точно в график ТО, нареканий по качеству нет».
-  </div>
-  <div class="case">
-    <strong>Кейс 2:</strong> Электронные и силовые модули для модернизации автоматизированной линии на заводе в Чебоксарах. 34 блока, поставка за 10 дней. Отзыв: «Запустили линию раньше срока, благодаря цифровому резерву и чёткой упаковке».
-  </div>
-  <div class="case">
-    <strong>Кейс 3:</strong> Компрессоры Danfoss для системы охлаждения железнодорожных вагонов в Москве. Поставка — 160 штук за 30 дней. Отзыв: «Минимум бумаги, сопровождение на каждом этапе. Эффективность подтвердили тесты на маршруте — отказов не зафиксировано, возврат не потребовался».
-  </div>
-  <p><strong>Гарантийный оффер:</strong> Если оборудование простаивает по нашей вине — 20% возврата в течение 72 часов.</p>
-  <p><strong>Сертификация:</strong> ГОСТ, ISO 9001. Партнёрство: Надёжная партнёрская сеть по ЕАЭС, Китаю, Азиатскому региону и Европе.
-  </p>
-</section>
-<noscript><p style="color:red;text-align:center;">Для работы сайта включите JavaScript.</p></noscript>
+  <script>
+    function sendForm(e) {
+      e.preventDefault();
+      const name = document.querySelector('input[type="text"]').value;
+      const phone = document.querySelector('input[type="tel"]').value;
+      const token = '7946517201:AAFD7wnkmY3lWyPPkhDWzBu9qyYko_77EqA';
+      const chatId = '125279912';
+      const msg = `📥 Новая заявка:\n👤 Имя: ${name}\n📞 Телефон: ${phone}`;
+      fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ chat_id: chatId, text: msg })
+      }).then(() => alert('Заявка отправлена!')).catch(() => alert('Ошибка отправки.'));
+      e.target.reset();
+    }
+  </script>
 </body>
 </html>
