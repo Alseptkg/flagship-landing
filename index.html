@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <!-- Favicon and Social Preview -->
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/1198/1198293.png" type="image/png">
+  <meta property="og:title" content="Флагманские поставки для промышленности">
+  <meta property="og:description" content="Поставки компрессоров, проволоки и модулей от 14 дней с гарантией и возвратом.">
+  <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Eurasian_Economic_Union_Map.svg/600px-Eurasian_Economic_Union_Map.svg.png">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Responsive Tweaks -->
+  <style>
+    @media screen and (max-width: 768px) {
+      .form, .hero, .trust, .category-button {
+        padding: 1rem !important;
+      }
+      .form input, .form button {
+        width: 100%;
+        font-size: 1rem;
+      }
+    }
+  </style>
+
+  <!-- Analytics -->
+  <script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+      m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+      m[i].l=1*new Date();
+      k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    ym(12345678, "init", {
+      clickmap:true,
+      trackLinks:true,
+      accurateTrackBounce:true
+    });
+  </script>
+  <noscript><div><img src="https://mc.yandex.ru/watch/12345678" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Флагманские Поставки</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <script>
+    function showItem(id) {
+      const ids = ['compressor-section', 'wire-section', 'module-section'];
+      ids.forEach(function(sectionId) {
+        const el = document.getElementById(sectionId);
+        if (el) {
+          el.style.display = sectionId === id ? 'block' : 'none';
+        }
+      });
+      const buttons = document.querySelectorAll('.category-button');
+      buttons.forEach(btn => btn.classList.remove('active'));
+      const activeBtn = Array.from(buttons).find(btn => btn.getAttribute('onclick').includes(id));
+      if (activeBtn) activeBtn.classList.add('active');
+    }
+  </script>
+</head>
+<body style="background-color: #f4f6fa; font-family: 'Inter', sans-serif; color: #1a1a1a; line-height: 1.6;">
+  <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 2rem;">
+    <!-- контент сайта -->
+  </div>
+</body>
+</html>
