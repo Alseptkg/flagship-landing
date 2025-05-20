@@ -43,35 +43,36 @@
   <script>
     (function(m,e,t,r,i,k,a){ m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)}; m[i].l=1*new Date(); k=e.createElement(t), a=e.getElementsByTagName(t)[0]; k.async=1; k.src=r; a.parentNode.insertBefore(k,a);
     })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js', 'ym');
-    ym(12345678, 'init', { clickmap:true, trackLinks:true, accurateTrackBounce:true });
+    ym(102029037, 'init', { clickmap:true, trackLinks:true, accurateTrackBounce:true });
   </script>
-  <noscript><div><img src="https://mc.yandex.ru/watch/12345678" style="position:absolute; left:-9999px;" alt=""/></div></noscript>
+  <noscript><div><img src="https://mc.yandex.ru/watch/102029037" style="position:absolute; left:-9999px;" alt=""/></div></noscript>
 
   <!-- Scripts -->
   <script>
-    function showItem(id) {
-      ['compressor-section','wire-section','module-section'].forEach(s => {
-        const el = document.getElementById(s);
-        if (el) el.style.display = s===id?'block':'none';
-      });
-      document.querySelectorAll('.category-button').forEach(btn => btn.classList.remove('active'));
-      const active = [...document.querySelectorAll('.category-button')].find(b=>b.getAttribute('onclick').includes(id));
-      if(active) active.classList.add('active');
-    }
     function sendForm(e) {
       e.preventDefault();
       const form = e.target;
       const name = form.querySelector('input[type="text"]').value;
       const phone = form.querySelector('input[type="tel"]').value;
+      const message = form.querySelector('textarea').value;
       const token = '7946517201:AAFD7wnkmY3lWyPPkhDWzBu9qyYko_77EqA';
       const chatId = '125279912';
-      const msg = `📥 Новая заявка:
-👤 Имя: ${name}
-📞 Телефон: ${phone}`;
-      fetch(`https://api.telegram.org/bot${token}/sendMessage`,{
-        method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({chat_id:chatId,text:msg})
-      }).then(()=>alert('Заявка отправлена!')).catch(()=>alert('Ошибка отправки.'));
-      form.reset();
+      const msg = `📥 Новая заявка:\n👤 Имя: ${name}\n📞 Телефон: ${phone}\n💬 Сообщение: ${message}`;
+      const btn = form.querySelector("button");
+      btn.disabled = true;
+      fetch("http://151.236.216.49/send.php", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ name, phone, message })
+      }).then(() => {
+        alert('Заявка отправлена!');
+        form.reset();
+        setTimeout(() => { btn.disabled = false; }, 5000);
+        window.location.hash = 'thank-you';
+      }).catch(() => {
+        alert('Ошибка отправки.');
+        btn.disabled = false;
+      });
     }
   </script>
 </head>
@@ -82,11 +83,12 @@
       <p>Компрессоры, сварочная проволока, электронные модули. Гарантия 24 мес., фиксированная цена, возврат 20%.</p>
       <form class="form" onsubmit="sendForm(event)">
         <input type="text" placeholder="Ваше имя" required>
-        <input type="tel" placeholder="Телефон" required>
+        <input type="tel" placeholder="Телефон" required pattern="\+?[0-9\s\-]{10,15}" title="Введите номер телефона в формате +7XXXXXXXXXX">
+    <textarea placeholder="Ваше сообщение" rows="4" style="width:100%; padding:1rem; margin-bottom:1rem; border-radius:8px; border:1px solid #ccc; font-size:1rem;"></textarea>
         <button type="submit">Получить предложение</button>
       </form>
       <div class="whatsapp">
-        <a href="https://wa.me/71234567890?utm_source=landing&utm_medium=button&utm_campaign=lead_form" target="_blank">Связаться в WhatsApp</a>
+        <a href="https://wa.me/996505199139?utm_source=landing&utm_medium=button&utm_campaign=lead_form" target="_blank">Связаться в WhatsApp</a>
       </div>
     </section>
 
@@ -122,5 +124,9 @@
 
     <noscript><p style="color:red;text-align:center;">Для работы сайта включите JavaScript.</p></noscript>
   </div>
+
+<div id="thank-you" style="margin-top:2rem; text-align:center; font-weight:bold; color:green;">
+  ✅ Спасибо! Ваша заявка отправлена.
+</div>
 </body>
 </html>
