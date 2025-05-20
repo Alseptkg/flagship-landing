@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+  
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Флагманские Поставки</title>
@@ -49,6 +50,15 @@
 
   <!-- Scripts -->
   <script>
+    function showItem(id) {
+      ['compressor-section','wire-section','module-section'].forEach(s => {
+        const el = document.getElementById(s);
+        if (el) el.style.display = s===id?'block':'none';
+      });
+      document.querySelectorAll('.category-button').forEach(btn => btn.classList.remove('active'));
+      const active = [...document.querySelectorAll('.category-button')].find(b=>b.getAttribute('onclick').includes(id));
+      if(active) active.classList.add('active');
+    }
     function sendForm(e) {
       e.preventDefault();
       const form = e.target;
@@ -60,14 +70,20 @@
       const msg = `📥 Новая заявка:\n👤 Имя: ${name}\n📞 Телефон: ${phone}\n💬 Сообщение: ${message}`;
       const btn = form.querySelector("button");
       btn.disabled = true;
-      fetch("http://151.236.216.49/send.php", {
+
+      const formData = new FormData();
+  formData.append("name", name);
+  formData.append("phone", phone);
+  formData.append("message", message);
+  fetch("http://151.236.216.49/send.php", {
   method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ name, phone, message })
+  body: formData
       }).then(() => {
         alert('Заявка отправлена!');
         form.reset();
         setTimeout(() => { btn.disabled = false; }, 5000);
+        ym(102029037, 'reachGoal', 'form_submit');
+        document.getElementById('thank-you').scrollIntoView({ behavior: 'smooth' });
         window.location.hash = 'thank-you';
       }).catch(() => {
         alert('Ошибка отправки.');
@@ -77,14 +93,18 @@
   </script>
 </head>
 <body>
+
+
+
+  
   <div class="container">
     <section class="hero">
       <h1>Закажите промышленную поставку — от 14 дней под ключ</h1>
       <p>Компрессоры, сварочная проволока, электронные модули. Гарантия 24 мес., фиксированная цена, возврат 20%.</p>
       <form class="form" onsubmit="sendForm(event)">
-        <input type="text" placeholder="Ваше имя" required>
-        <input type="tel" placeholder="Телефон" required pattern="\+?[0-9\s\-]{10,15}" title="Введите номер телефона в формате +7XXXXXXXXXX">
-    <textarea placeholder="Ваше сообщение" rows="4" style="width:100%; padding:1rem; margin-bottom:1rem; border-radius:8px; border:1px solid #ccc; font-size:1rem;"></textarea>
+        <input type="text" name="name" placeholder="Ваше имя" required>
+        <input type="tel" name="phone" placeholder="Телефон" required pattern="^\+?(7|8)\d{10}$" title="Введите номер в формате +79001234567">
+    <textarea name="message" placeholder="Ваше сообщение" rows="4" style="width:100%; padding:1rem; margin-bottom:1rem; border-radius:8px; border:1px solid #ccc; font-size:1rem;"></textarea>
         <button type="submit">Получить предложение</button>
       </form>
       <div class="whatsapp">
