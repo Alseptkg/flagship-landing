@@ -78,7 +78,17 @@ function sendForm(e) {
   });
 }
 </script>
-</head>
+<script>
+function showItem(id) {
+  ['compressor-section','wire-section','module-section'].forEach(s => {
+    const el = document.getElementById(s);
+    if (el) el.style.display = s === id ? 'block' : 'none';
+  });
+  document.querySelectorAll('.category-button').forEach(btn => btn.classList.remove('active'));
+  const active = [...document.querySelectorAll('.category-button')].find(b => b.getAttribute('onclick').includes(id));
+  if (active) active.classList.add('active');
+}
+</script></head>
 <body>
 <div class="container">
 <section class="hero">
