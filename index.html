@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 
 <html lang="ru">
@@ -75,7 +74,14 @@ function sendForm(e) {
     method: "POST",
     body: formData
   }).then(() => {
-    ym(102029037, 'reachGoal', 'form_submit');
+      fetch("https://script.google.com/macros/s/AKfycbzgvwJp-J-K7uBZgyUEzHqeS4jrNCHBWVPB--ZDsqAVf5Hz4A32AtX5IZoGpXlfkIBA/exec", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ name: name, phone: phone, message: message })
+  });
+ym(102029037, 'reachGoal', 'form_submit');
     const thanks = document.getElementById('thank-you');
     if (thanks) {
       thanks.scrollIntoView({ behavior: 'smooth' });
@@ -116,27 +122,27 @@ function sendForm(e) {
 <button class="category-button" onclick="showItem('module-section')">Электронные модули</button>
 </div>
 <div id="compressor-section">
-<p><strong>Спиральные компрессоры:</strong> от 85 000 ₽/шт, срок поставки — от 14 дней.</p>
-<ul><li>Фиксированная цена — 12 мес.</li><li>Гарантия 24 мес.</li><li>Возврат 20% при простое.</li><li>Блокчейн-логистика, AI-прогноз.</li></ul>
+<p><strong>Спиральные компрессоры:</strong> от 85 000 ₽/шт, срок поставки — от 14 дней.</p>
+<ul><li>Фиксированная цена — 12 мес.</li><li>Гарантия 24 мес.</li><li>Возврат 20% при простое.</li><li>Блокчейн-логистика, AI-прогноз.</li></ul>
 </div>
 <div id="wire-section" style="display:none;">
-<p><strong>Медный сварочный провод AWS ER70S‑6:</strong> от 165 ₽/кг при отгрузке от 20 тонн.</p>
-<ul><li>Диаметры 0,8 / 1,0 / 1,2 мм</li><li>Катушки 15 кг (30×20×19 см)</li><li>Поставка — от 14 дней</li><li>Фикс цена — 2 мес.</li><li>Возврат 20% при браке</li></ul>
+<p><strong>Медный сварочный провод AWS ER70S‑6:</strong> от 165 ₽/кг при отгрузке от 20 тонн.</p>
+<ul><li>Диаметры 0,8 / 1,0 / 1,2 мм</li><li>Катушки 15 кг (30×20×19 см)</li><li>Поставка — от 14 дней</li><li>Фикс цена — 2 мес.</li><li>Возврат 20% при браке</li></ul>
 </div>
 <div id="module-section" style="display:none;">
 <p><strong>Электронные модули и силовые блоки:</strong></p>
-<ul><li>Поставка — от 14 дней</li><li>Гарантия 24 мес.</li><li>Фикс цена — 3 мес.</li><li>Возврат 20% при браке</li><li>Сертификаты ГОСТ, ISO 9001</li></ul>
+<ul><li>Поставка — от 14 дней</li><li>Гарантия 24 мес.</li><li>Фикс цена — 3 мес.</li><li>Возврат 20% при браке</li><li>Сертификаты ГОСТ, ISO 9001</li></ul>
 </div>
 </section>
 <section class="trust">
 <h2>Отзывы клиентов</h2>
-<div class="case"><strong>Кейс 1:</strong> Поставка сварочной проволоки AWS ER70S‑6 на завод в Екатеринбурге (48 300 кг, 20 дней). Отзыв: «Приехало точно в график ТО, нареканий нет».</div>
-<div class="case"><strong>Кейс 2:</strong> Электронные и силовые модули для модернизации линии в Чебоксарах (34 блока, 10 дней). Отзыв: «Запустили раньше срока, цифровой резерв».</div>
-<div class="case"><strong>Кейс 3:</strong> Компрессоры Danfoss для охлаждения ж/д вагонов в Москве (160 шт, 30 дней). Отзыв: «Эффективность подтвердили — отказов нет».</div>
-<p><strong>Гарантийный оффер:</strong> 20% возврата при простое в течение 72 ч.</p>
-<p><strong>Сертификация:</strong> ГОСТ, ISO 9001. <strong>Партнёрство:</strong> сеть по ЕАЭС, Китаю, Азии, Европе.</p>
+<div class="case"><strong>Кейс 1:</strong> Поставка сварочной проволоки AWS ER70S‑6 на завод в Екатеринбурге (48 300 кг, 20 дней). Отзыв: «Приехало точно в график ТО, нареканий нет».</div>
+<div class="case"><strong>Кейс 2:</strong> Электронные и силовые модули для модернизации линии в Чебоксарах (34 блока, 10 дней). Отзыв: «Запустили раньше срока, цифровой резерв».</div>
+<div class="case"><strong>Кейс 3:</strong> Компрессоры Danfoss для охлаждения ж/д вагонов в Москве (160 шт, 30 дней). Отзыв: «Эффективность подтвердили — отказов нет».</div>
+<p><strong>Гарантийный оффер:</strong> 20% возврата при простое в течение 72 ч.</p>
+<p><strong>Сертификация:</strong> ГОСТ, ISO 9001. <strong>Партнёрство:</strong> сеть по ЕАЭС, Китаю, Азии, Европе.</p>
 </section>
-<noscript><p style="color:red;text-align:center;">Для работы сайта включите JavaScript.</p></noscript>
+<noscript><p style="color:red;text-align:center;">Для работы сайта включите JavaScript.</p></noscript>
 </div>
 <div id="thank-you" style="margin-top:2rem; text-align:center; font-weight:bold; color:green;">
   ✅ Спасибо! Ваша заявка отправлена.
