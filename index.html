@@ -77,23 +77,6 @@ function sendForm(e) {
     btn.disabled = false;
   });
 }
-).then(() => {
-    ym(102029037, 'reachGoal', 'form_submit');
-    const thanks = document.getElementById('thank-you');
-    if (thanks) {
-      thanks.scrollIntoView({ behavior: 'smooth' });
-    }
-    btn.textContent = "Отправлено!";
-    form.reset();
-    setTimeout(() => {
-      btn.disabled = false;
-      btn.textContent = "Получить предложение";
-    }, 4000);
-  }).catch(() => {
-    alert('Ошибка отправки.');
-    btn.disabled = false;
-  });
-}
 </script>
 </head>
 <body>
@@ -102,7 +85,7 @@ function sendForm(e) {
 <h1>Закажите промышленную поставку — от 14 дней под ключ</h1>
 <p>Компрессоры, сварочная проволока, электронные модули. Гарантия 24 мес., фиксированная цена, возврат 20%.</p>
 <form class="form" onsubmit="sendForm(event)">
-<input name="name" oninput="this.value = this.value.replace(/(^|\s)\S/g, l =&gt; l.toUpperCase());" placeholder="Ваше имя" required="" type="text"/>
+<input name="name" oninput="this.value = this.value.replace(/(^|\s)\S/g, l => l.toUpperCase());" placeholder="Ваше имя" required="" type="text"/>
 <input maxlength="16" name="phone" oninput="let val = this.value.replace(/[^\d]/g, '');if (val.startsWith('8')) val = '7' + val.slice(1);if (!val.startsWith('7')) val = '7' + val;this.value = '+' + val.slice(0, 11);" placeholder="+7XXXXXXXXXX" required="" title="Введите номер в формате +79001234567" type="tel"/>
 <textarea name="message" placeholder="Ваше сообщение" rows="4" style="width:100%; padding:1rem; margin-bottom:1rem; border-radius:8px; border:1px solid #ccc; font-size:1rem;"></textarea>
 <button type="submit">Получить предложение</button>
